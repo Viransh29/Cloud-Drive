@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Shared With Me{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+    <h3><i class="bi bi-cloud-fill"></i> Cloud Drive</h3>
+    <a href="{% url 'dashboard' %}"><i class="bi bi-folder2-open"></i> My Drive</a>
+    <a href="{% url 'shared_with_me' %}"><i class="bi bi-share"></i> Shared With Me</a>
+    <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <div>
+            <p class="text-muted mb-1">Files shared by other users</p>
+            <h2 class="mb-0">Shared With Me</h2>
+        </div>
+        <a class="btn btn-outline-primary" href="{% url 'dashboard' %}">
+            <i class="bi bi-folder2-open"></i>
+            My Drive
+        </a>
+    </div>
+
+    <section class="content-section">
+        <div class="section-heading">
+            <h3>Shared Files</h3>
+        </div>
+
+        <div class="file-list">
+            {% for share in shared_files %}
+                <article class="file-row">
+                    <div class="file-meta">
+                        <i class="bi bi-file-earmark-lock"></i>
+                        <div>
+                            <h6>{{ share.file.original_name }}</h6>
+                            <span>
+                                Shared by {{ share.file.owner.username }} |
+                                {{ share.permission|title }} |
+                                {{ share.file.file_size|filesizeformat }}
+                            </span>
+                        </div>
+                    </div>
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'download_file' share.file.id %}">
+                        <i class="bi bi-download"></i>
+                    </a>
+                </article>
+            {% empty %}
+                <p class="empty-state">No files have been shared with you yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

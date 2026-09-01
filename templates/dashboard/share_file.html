@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Share File{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+    <h3><i class="bi bi-cloud-fill"></i> Cloud Drive</h3>
+    <a href="{% url 'dashboard' %}"><i class="bi bi-folder2-open"></i> My Drive</a>
+    <a href="{% url 'shared_with_me' %}"><i class="bi bi-share"></i> Shared With Me</a>
+    <a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</aside>
+
+<main class="main-content">
+    <div class="topbar">
+        <div>
+            <p class="text-muted mb-1">Sharing</p>
+            <h2 class="mb-0">{{ file.original_name }}</h2>
+        </div>
+        <a class="btn btn-outline-primary" href="{% url 'dashboard' %}">
+            <i class="bi bi-arrow-left"></i>
+            My Drive
+        </a>
+    </div>
+
+    {% if messages %}
+        <div class="mt-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags|default:'info' }} mb-2">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <section class="drive-actions">
+        <form method="POST" class="action-panel">
+            {% csrf_token %}
+            <h5><i class="bi bi-person-plus"></i> Share With User</h5>
+            {{ form.as_p }}
+            <button class="btn btn-primary w-100">
+                Share File
+            </button>
+        </form>
+
+        <div class="action-panel">
+            <h5><i class="bi bi-info-circle"></i> File Details</h5>
+            <p><strong>Size:</strong> {{ file.file_size|filesizeformat }}</p>
+            <p><strong>Type:</strong> {{ file.file_type }}</p>
+            <p><strong>Uploaded:</strong> {{ file.uploaded_at|date:"M d, Y H:i" }}</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-heading">
+            <h3>People With Access</h3>
+        </div>
+
+        <div class="file-list">
+            {% for share in shared_users %}
+                <article class="file-row">
+                    <div class="file-meta">
+                        <i class="bi bi-person-check"></i>
+                        <div>
+                            <h6>{{ share.shared_with.username }}</h6>
+                            <span>{{ share.permission|title }} access</span>
+                        </div>
+                    </div>
+                    <form method="POST" action="{% url 'unshare_file' share.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-danger">
+                            <i class="bi bi-x-circle"></i>
+                            Remove
+                        </button>
+                    </form>
+                </article>
+            {% empty %}
+                <p class="empty-state">This file is not shared yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

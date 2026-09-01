@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Cloud Drive{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3 text-primary" href="{% url 'home' %}">
+            <i class="bi bi-cloud-fill"></i>
+            Cloud Drive
+        </a>
+        <div>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">
+                Login
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-primary">
+                Register
+            </a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold">
+                    Store. <span class="text-primary">Share.</span> Secure.
+                </h1>
+                <p class="lead mt-4">
+                    Upload, organize and securely share your files anytime,
+                    anywhere.
+                </p>
+                <div class="mt-5">
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-3">
+                        Get Started
+                    </a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg">
+                        Login
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="bi bi-cloud-arrow-up-fill hero-icon"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="bi bi-folder-fill"></i>
+                    <h4>Folder Management</h4>
+                    <p>Create and organize folders easily.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="bi bi-cloud-upload-fill"></i>
+                    <h4>File Upload</h4>
+                    <p>Upload files securely.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="bi bi-share-fill"></i>
+                    <h4>File Sharing</h4>
+                    <p>Share files with selected users.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <h4>Secure Access</h4>
+                    <p>Keep every drive private by default.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-center py-4">
+    &copy; 2026 Cloud Drive | Django Project
+</footer>
+{% endblock %}

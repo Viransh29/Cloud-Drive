@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Rename Folder{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="rename-page">
+    <section class="rename-panel">
+        <h2>Rename Folder</h2>
+        <p class="text-muted">Current name: {{ folder.name }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary">
+                Save
+            </button>
+            {% if folder.parent_folder %}
+                <a class="btn btn-outline-secondary" href="{% url 'folder_detail' folder.parent_folder.id %}">
+                    Back
+                </a>
+            {% else %}
+                <a class="btn btn-outline-secondary" href="{% url 'dashboard' %}">
+                    Back
+                </a>
+            {% endif %}
+        </form>
+    </section>
+</main>
+{% endblock %}
