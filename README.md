@@ -1,42 +1,102 @@
-# Cloud File Sharing System
+# ☁️ Cloud Drive
 
-A Django-based cloud drive project for user registration, login, folder organization, file upload, download, and basic deletion.
+A Django-based cloud file management and sharing platform inspired by applications such as Google Drive.
 
-## Setup
+The application allows users to securely manage their files and folders, organize uploaded content, and share files with other users through controlled permissions.
 
-```powershell
-python -m venv venv
-.\venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
+---
 
-Open `http://127.0.0.1:8000/`.
+## Project Overview
 
-## Current Features
+The **Cloud Drive** is a web-based file management application developed using Django.
 
-- User registration, login, and logout
-- Create folders and nested subfolders
-- Rename and delete folders
-- Upload files into the root drive or a folder
-- Share files with another user as viewer or editor
-- View files shared by other users in "Shared With Me"
-- Download files owned by the signed-in user or shared with them
-- Soft-delete files from the drive view
-- Django admin configuration for folders, files, and sharing records
+The system provides an authenticated environment where users can create folders, upload and manage files, organize their data, and share files with other registered users.
 
-## Useful Commands
+The project focuses on implementing core cloud-storage concepts such as:
 
-```powershell
-python manage.py check
-python manage.py test
-```
+- User authentication
+- File and folder management
+- Hierarchical folder organization
+- File sharing
+- Permission management
+- Storage management
+- Secure user-specific data access
 
-## Suggested Next Features
+---
 
-- Trash/recovery page for soft-deleted files
-- Storage quota per user
-- Search and file type filters
-- Public share links using `SharedFile.share_token`
-- Production settings with environment variables
+## ✨ Features
+
+### 👤 User Authentication
+
+- User registration
+- User login and logout
+- Django authentication system
+- Password validation
+- User-specific file and folder access
+
+### 📁 Folder Management
+
+- Create folders
+- Open folders
+- Rename folders
+- Delete folders
+
+### 📄 File Management
+
+- Upload files
+- Download files
+- Store uploaded files
+- Display files inside folders
+- Track file size
+- Track file type
+- Delete files
+
+### 🔗 File Sharing
+
+- Share files with other users
+- Assign permissions to shared files
+- Viewer permission
+- Editor permission
+- View files shared with the current user
+
+### 🔐 Permission Management
+
+The application separates file ownership from file-sharing permissions.
+
+Users can access their own files while shared users can access files according to the permission assigned to them.
+
+### 💾 Storage Management
+
+The project includes a storage service for managing user file storage.
+
+---
+
+## 🛠️ Technologies Used
+
+### Backend
+
+- Python
+- Django
+
+### Frontend
+
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap
+
+### Database
+
+- SQLite
+
+### Authentication
+
+- Django Authentication System
+
+### Development Tools
+
+- Visual Studio Code
+- Git
+- GitHub
+
+---
